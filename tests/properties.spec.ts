@@ -32,7 +32,50 @@ describe('/properties', () => {
     });
 
     // act
-    const result = response.json() as { message: string };
+    const result = response.json();
+
+    // assert
+    expect(response.statusCode).toBe(500);
+    expect(result.message).toBe(errorMessage);
+  });
+
+  it('saves a property', async () => {
+    // assemble
+    const response = await server.inject({
+      method: 'POST',
+      url: '/properties',
+      body: {
+        "address": "17 Bryant Street, Agnes Water, Qld 4677",
+        "salePrice": 875000,
+        "description": "Welcome to 17 Bryant Street, Agnes Water - a delightful seaside retreat offering uninterrupted ocean views and the ultimate coastal lifestyle. Perfectly positioned just minutes from pristine beaches, this charming cottage is an ideal holiday getaway, investment, or dream home by the sea."
+      }
+    });
+
+    // act
+    const result = response.json();
+
+    // assert
+    expect(response.statusCode).toBe(200);
+    expect(result.data).toBeTypeOf('string');
+  });
+
+  it('returns an error message when service.saveProperty throws an error', async () => {
+    // assemble
+    const error = new Error("Database connection failed.");
+    vi.spyOn(console, 'error').mockImplementation(vi.fn());
+    vi.spyOn(service, 'saveProperty').mockRejectedValueOnce(error);
+    const response = await server.inject({
+      method: 'POST',
+      url: '/properties',
+      body: {
+        "address": "17 Bryant Street, Agnes Water, Qld 4677",
+        "salePrice": 875000,
+        "description": "Welcome to 17 Bryant Street, Agnes Water - a delightful seaside retreat offering uninterrupted ocean views and the ultimate coastal lifestyle. Perfectly positioned just minutes from pristine beaches, this charming cottage is an ideal holiday getaway, investment, or dream home by the sea."
+      }
+    });
+
+    // act
+    const result = response.json();
 
     // assert
     expect(response.statusCode).toBe(500);
