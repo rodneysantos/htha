@@ -21,6 +21,7 @@
     "vitest": "3.2.4"
   },
   "imports": {
+    "#constants/*.ts": "./src/constants/*.ts",
     "#types/*.ts": "./types/*.ts"
   }
 }
