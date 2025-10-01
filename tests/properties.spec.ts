@@ -21,6 +21,21 @@ describe('/properties', () => {
     expect(properties.data.length).toEqual(10);
   });
 
+  it('returns a filtered list of properties when suburb query param is provided', async () => {
+    // assemble
+    const response = await server.inject({
+      method: 'GET',
+      url: '/properties?suburb=Croydon'
+    });
+
+    // act
+    const properties = response.json() as HttpResponse<Property[]>;
+
+    // assert
+    expect(response.statusCode).toBe(200);
+    expect(properties.data.length).toEqual(1);
+  });
+
   it('returns an error message when service throws an error', async () => {
     // assemble
     const error = new Error("Database connection failed.");

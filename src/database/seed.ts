@@ -8,6 +8,7 @@ async function seed() {
   const properties = (propertiesData as Property[]).map(p => {
     return {
       address: p.address,
+      suburb: p.suburb,
       description: p.description,
       salePrice: p.salePrice,
     } as typeof propertiesTable.$inferInsert
