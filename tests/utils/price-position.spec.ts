@@ -1,5 +1,5 @@
+import { pricePosition } from '#modules/utils/price-position.ts';
 import { describe, expect, it } from 'vitest';
-import { pricePosition } from './price-position.ts';
 
 describe('pricePosition', () => {
   it('returns "above"', () => {
