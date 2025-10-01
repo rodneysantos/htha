@@ -41,6 +41,8 @@ describe('/properties', () => {
 
   it('saves a property', async () => {
     // assemble
+    const uuid = "8775d425-8c37-4994-8da5-4e1f451eb254";
+    vi.spyOn(crypto, 'randomUUID').mockReturnValueOnce(uuid);
     const response = await server.inject({
       method: 'POST',
       url: '/properties',
@@ -56,7 +58,7 @@ describe('/properties', () => {
 
     // assert
     expect(response.statusCode).toBe(200);
-    expect(result.data).toBeTypeOf('string');
+    expect(result.data).toEqual(uuid);
   });
 
   it('returns an error message when service.saveProperty throws an error', async () => {
