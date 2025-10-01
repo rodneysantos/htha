@@ -8,4 +8,5 @@ CREATE TABLE "properties" (
 	CONSTRAINT "properties_id_unique" UNIQUE("id")
 );
 --> statement-breakpoint
-CREATE INDEX "suburb_idx" ON "properties" USING btree ("suburb");
+CREATE INDEX "suburb_idx" ON "properties" USING btree ("suburb");--> statement-breakpoint
+CREATE INDEX "sale_price_idx" ON "properties" USING btree ("sale_price");

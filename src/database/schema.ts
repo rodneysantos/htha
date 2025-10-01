@@ -9,4 +9,5 @@ export const propertiesTable = pgTable('properties', {
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 }, (table) => [
   index('suburb_idx').on(table.suburb),
+  index('sale_price_idx').on(table.salePrice),
 ]);

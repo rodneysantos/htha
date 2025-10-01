@@ -1,5 +1,5 @@
 {
-  "id": "192715c2-8f01-417e-9075-f9a70f08f3b1",
+  "id": "fcc0a69c-8c0a-4c69-a0d3-c462ccfc3384",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -53,6 +53,21 @@
           "columns": [
             {
               "expression": "suburb",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sale_price_idx": {
+          "name": "sale_price_idx",
+          "columns": [
+            {
+              "expression": "sale_price",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
