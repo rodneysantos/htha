@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { calculateMedianPrice } from './median-price.ts';
 
-describe('median', () => {
+describe('calculateMedianPrice', () => {
   // sorted: [ 330_000, 340_000, 625_000, 690_000, 880_000, 1_100_000, 1_449_000, 1_465_000, 1_695_000, 1_700_000 ]
   const prices = [
     1_100_000, 690_000, 330_000,
@@ -9,7 +9,6 @@ describe('median', () => {
     625_000, 340_000, 1_700_000,
     880_000,
   ];
-
 
   it('returns the median price when even', () => {
     // assemble
