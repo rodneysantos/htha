@@ -18,7 +18,7 @@ async function seed() {
 }
 
 // This runs the seed function on db:up, but not during tests
-if (env.node != 'test') {
+if (env.node == undefined) {
   seed();
 }
 
