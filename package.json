@@ -32,6 +32,7 @@
     "#modules/constants/*.ts": "./src/constants/*.ts",
     "#modules/database/*.ts": "./src/database/*.ts",
     "#modules/properties/*.ts": "./src/properties/*.ts",
+    "#modules/utils/*.ts": "./src/utils/*.ts",
     "#types/*.ts": "./types/*.ts"
   }
 }
