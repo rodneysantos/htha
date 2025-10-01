@@ -1,8 +1,8 @@
-import { errorMessage } from '#constants/messages.ts';
+import { errorMessage } from '#modules/constants/messages.ts';
+import service from '#modules/properties/service.ts';
+import type { Property } from '#modules/properties/types.ts';
 import type { HttpResponse } from '#types/http-client.ts';
 import { describe, expect, it, vi } from 'vitest';
-import service from '../src/properties/service.ts';
-import type { Property } from '../src/properties/types.ts';
 import server from '../src/server.ts';
 
 describe('/properties', () => {
@@ -41,8 +41,6 @@ describe('/properties', () => {
 
   it('saves a property', async () => {
     // assemble
-    const uuid = "8775d425-8c37-4994-8da5-4e1f451eb254";
-    vi.spyOn(crypto, 'randomUUID').mockReturnValueOnce(uuid);
     const response = await server.inject({
       method: 'POST',
       url: '/properties',
@@ -58,7 +56,7 @@ describe('/properties', () => {
 
     // assert
     expect(response.statusCode).toBe(200);
-    expect(result.data).toEqual(uuid);
+    expect(result.data).toHaveProperty('id');
   });
 
   it('returns an error message when service.saveProperty throws an error', async () => {

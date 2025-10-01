@@ -1,16 +1,18 @@
-import json from "../../data/properties.json" with { type: "json" };
+import { db } from "#modules/database/connection.ts";
+import { propertiesTable } from '#modules/database/schema.ts';
 import type { Property } from './types.ts';
 
-let mockData: Property[] = json;
-
 async function getProperties() {
-  return mockData;
+  const results = await db.select().from(propertiesTable);
+  return results;
 }
 
 async function saveProperty(property: Property) {
-  const id = crypto.randomUUID();
-  mockData = [...mockData, { id, ...property }];
-  return id;
+  const result = await db.insert(propertiesTable)
+    .values(property)
+    .returning({ id: propertiesTable.id });
+
+  return result;
 }
 
 export default { getProperties, saveProperty }

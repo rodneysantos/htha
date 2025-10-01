@@ -1,5 +1,5 @@
-import { INTERNAL_SERVER_ERROR } from '#constants/http-codes.ts';
-import { errorMessage } from '#constants/messages.ts';
+import { INTERNAL_SERVER_ERROR } from '#modules/constants/http-codes.ts';
+import { errorMessage } from '#modules/constants/messages.ts';
 import type { RouteHandlerMethod } from 'fastify';
 import service from "../service.ts";
 
