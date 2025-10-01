@@ -1,6 +1,6 @@
 import { db } from "#modules/database/connection.ts";
 import { propertiesTable } from '#modules/database/schema.ts';
-import { eq } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import type { Property } from './types.ts';
 
 async function getProperties(sub?: string) {
@@ -15,6 +15,14 @@ async function getProperties(sub?: string) {
   return results;
 }
 
+async function getSalePrices() {
+  const results = db.select({ salePrice: propertiesTable.salePrice })
+    .from(propertiesTable)
+    .orderBy(asc(propertiesTable.salePrice));
+
+  return results;
+}
+
 async function saveProperty(property: Property) {
   const suburb = property.address.split(',')[1].trim().toLowerCase();
   const p: Property = { ...property, suburb };
@@ -25,4 +33,4 @@ async function saveProperty(property: Property) {
   return result;
 }
 
-export default { getProperties, saveProperty }
+export default { getProperties, getSalePrices, saveProperty }

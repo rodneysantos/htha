@@ -1,5 +1,7 @@
 import { INTERNAL_SERVER_ERROR } from '#modules/constants/http-codes.ts';
 import { errorMessage } from '#modules/constants/messages.ts';
+import { calculateMedianPrice } from '#modules/utils/median-price.ts';
+import { pricePosition } from '#modules/utils/price-position.ts';
 import type { RouteHandlerMethod } from 'fastify';
 import service from "../service.ts";
 
@@ -11,7 +13,17 @@ export const getProperties: RouteHandlerMethod = async (request, reply) => {
   const query: QueryParams = request.query;
 
   try {
-    const properties = await service.getProperties(query?.suburb);
+    // This is not the ideal way. In real-world, we would calculate median price in DB query itself.
+    const salePrices = (await service.getSalePrices()).map(row => row.salePrice);
+    const median = calculateMedianPrice(salePrices);
+    const results = await service.getProperties(query?.suburb);
+    const properties = results.map(property => {
+      return {
+        ...property,
+        salePricePosition: pricePosition(median, property.salePrice),
+      }
+    });
+
     reply.send({ data: properties });
   } catch (error) {
     console.error("unable to get properties", error);
