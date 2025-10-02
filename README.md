@@ -26,6 +26,9 @@ Note: Only do this the first time.
 - `npm test` - Run tests.
 - `npm run test:cov` - Run tests with coverage report.
 
+#### Resources:
+- [Postman Collection]([https://.postman.co/workspace/My-Workspace~7ef92a01-1c91-442c-8ae8-f1fc93ebb8cc/collection/19171318-ae9d7f03-135e-486a-9c99-944d0fdc5072?action=share&creator=19171318&active-environment=19171318-3ab92caf-7d14-4063-bdf6-fc74be9fad54](https://www.postman.com/aviation-geologist-26301703/workspace/chris-public-apis/collection/19171318-ae9d7f03-135e-486a-9c99-944d0fdc5072?action=share&creator=19171318))
+
 ## Directory Structure
 ```shell
 .
