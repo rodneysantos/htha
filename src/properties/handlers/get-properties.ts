@@ -11,6 +11,7 @@ interface QueryParams {
 
 export const getProperties: RouteHandlerMethod = async (request, reply) => {
   const query: QueryParams = request.query;
+  request.log.info({ query }, "processing getProperties request");
 
   try {
     // This is not the ideal way. In real-world, we would calculate median price in DB query itself.
@@ -27,7 +28,8 @@ export const getProperties: RouteHandlerMethod = async (request, reply) => {
 
     reply.send({ data: properties });
   } catch (error) {
-    console.error("unable to get properties", error);
-    reply.code(INTERNAL_SERVER_ERROR).send({ message: errorMessage });
+    request.log.error({ error }, "unable to get properties");
+    reply.code(INTERNAL_SERVER_ERROR)
+      .send({ message: errorMessage });
   }
 }

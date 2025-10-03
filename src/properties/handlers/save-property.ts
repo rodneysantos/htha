@@ -6,12 +6,14 @@ import type { Property } from '../types.ts';
 
 export const saveProperty: RouteHandlerMethod = async (request, reply) => {
   const body = request.body as Property;
+  request.log.info({ body }, "processing saveProperty request");
 
   try {
     const result = await service.saveProperty(body);
     reply.send({ data: result[0] });
   } catch (error) {
-    console.error("unable to save property", { body, error });
-    reply.code(INTERNAL_SERVER_ERROR).send({ message: errorMessage });
+    request.log.error({ body, error }, "unable to save property",);
+    reply.code(INTERNAL_SERVER_ERROR)
+      .send({ message: errorMessage });
   }
 }
